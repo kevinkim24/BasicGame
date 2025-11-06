@@ -8,11 +8,10 @@
 //import java.awt.Canvas;
 
 //Graphics Libraries
-import java.awt.Graphics2D;
-import java.awt.image.BufferStrategy;
+
+import javax.swing.*;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.image.BufferStrategy;
 
 //*******************************************************************************
 
