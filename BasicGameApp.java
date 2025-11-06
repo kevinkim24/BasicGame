@@ -22,7 +22,7 @@ public class BasicGameApp implements Runnable {
     //You can set their initial values too
 
     //Sets the width and height of the program window
-    final int WIDTH = 1000;
+    final int WIDTH = 100;
     final int HEIGHT = 700;
 
     //Declare the variables needed for the graphics
