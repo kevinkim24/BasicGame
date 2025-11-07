@@ -1,46 +1,19 @@
-//Basic Game Application
-// Basic Object, Image, Movement
-// Threaded
-
-//*******************************************************************************
-//Import Section
-//Add Java libraries needed for the game
-//import java.awt.Canvas;
-
-//Graphics Libraries
-
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+// Graphics Libraries
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-
-//*******************************************************************************
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 public class BasicGameApp implements Runnable {
 
     //Variable Definition Section
-    //Declare the variables used in the program
     //You can set their initial values too
+    Mario mario;
 
     //Sets the width and height of the program window
-    final int WIDTH = 100;
+    final int WIDTH = 1000;
     final int HEIGHT = 700;
 
-    //Declare the variables needed for the graphics
-    public JFrame frame;
-    public Canvas canvas;
-    public JPanel panel;
-
-    public BufferStrategy bufferStrategy;
-
-    // Main method definition
-    // This is the code that runs first and automatically
-    public static void main(String[] args) {
-        BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-        new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
-    }
-
-
-    // This section is the setup portion of the program
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() { // BasicGameApp constructor
 
@@ -48,15 +21,48 @@ public class BasicGameApp implements Runnable {
 
         //variable and objects
         //create (construct) the objects needed for the game
+        Mario mario = new Mario(500,350,1,1,100,100);
+        mario.name = "Mario Mario";
+        System.out.println("Test2");
+        mario.image = Toolkit.getDefaultToolkit().getImage("Mario.png");
+        //mario.image = getImage("Mario.png");
 
     } // end BasicGameApp constructor
 
+    public void moveThings() {
+        //call the move() code for each object  -
+    }
 
-//*******************************************************************************
-//User Method Section
-//
-// put your code to do things here.
+    //Paints things on the screen using bufferStrategy
+    private void render() {
+        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, WIDTH, HEIGHT);
 
+        //draw the images
+        // Signature: drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
+
+        System.out.println("Test");
+        g.drawImage(mario.image,mario.xpos,mario.ypos,mario.width,mario.height,null);
+
+        g.dispose();
+        bufferStrategy.show();
+    }
+//---------------------------------------------------------------------------------------------------------------------
+    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    //Declare the variables needed for the graphics
+    public JFrame frame;
+    public Canvas canvas;
+    public JPanel panel;
+    public BufferStrategy bufferStrategy;
+
+    // PSVM: This is the code that runs first and automatically
+    public static void main(String[] args) {
+        BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
+        new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
+    }
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     // main thread
     // this is the code that plays the game after you set things up
     public void run() {
@@ -68,27 +74,16 @@ public class BasicGameApp implements Runnable {
         }
     }
 
-    public void moveThings() {
-        //call the move() code for each object
-    }
-
-    //Paints things on the screen using bufferStrategy
-    private void render() {
-        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.clearRect(0, 0, WIDTH, HEIGHT);
-
-        //draw the images
-
-        g.dispose();
-        bufferStrategy.show();
-    }
-
     //Pauses or sleeps the computer for the amount specified in milliseconds
     public void pause(int time ) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
         }
+    }
+
+    private Image getImage(String filename){
+        return Toolkit.getDefaultToolkit().getImage(filename);
     }
 
     //Graphics setup method
@@ -119,6 +114,6 @@ public class BasicGameApp implements Runnable {
         canvas.requestFocus();
         System.out.println("DONE graphic setup");
     }
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
