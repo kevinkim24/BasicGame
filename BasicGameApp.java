@@ -10,27 +10,28 @@ public class BasicGameApp implements Runnable {
     //You can set their initial values too
     Mario mario;
 
+    // I made an edit
+
     //Sets the width and height of the program window
     final int WIDTH = 1000;
     final int HEIGHT = 700;
 
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() { // BasicGameApp constructor
-
         setUpGraphics();
 
         //variable and objects
         //create (construct) the objects needed for the game
-        Mario mario = new Mario(500,350,1,1,100,100);
+        mario = new Mario(500,350,1.5,1.5,100,100);
         mario.name = "Mario Mario";
-        System.out.println("Test2");
         mario.image = Toolkit.getDefaultToolkit().getImage("Mario.png");
-        //mario.image = getImage("Mario.png");
-
-    } // end BasicGameApp constructor
+    }
+    // end BasicGameApp constructor
 
     public void moveThings() {
         //call the move() code for each object  -
+        mario.move();
+        mario.wrap();
     }
 
     //Paints things on the screen using bufferStrategy
@@ -40,15 +41,14 @@ public class BasicGameApp implements Runnable {
 
         //draw the images
         // Signature: drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
-
-        System.out.println("Test");
         g.drawImage(mario.image,mario.xpos,mario.ypos,mario.width,mario.height,null);
 
         g.dispose();
         bufferStrategy.show();
     }
-//---------------------------------------------------------------------------------------------------------------------
-    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     //Declare the variables needed for the graphics
     public JFrame frame;
     public Canvas canvas;
@@ -60,9 +60,7 @@ public class BasicGameApp implements Runnable {
         BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
         new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
     }
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     // main thread
     // this is the code that plays the game after you set things up
     public void run() {
@@ -115,5 +113,6 @@ public class BasicGameApp implements Runnable {
         System.out.println("DONE graphic setup");
     }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }
 
