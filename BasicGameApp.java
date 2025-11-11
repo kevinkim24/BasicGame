@@ -31,7 +31,6 @@ public class BasicGameApp implements Runnable {
     public void moveThings() {
         //call the move() code for each object  -
         mario.move();
-        mario.wrap();
     }
 
     //Paints things on the screen using bufferStrategy
@@ -46,6 +45,19 @@ public class BasicGameApp implements Runnable {
         g.dispose();
         bufferStrategy.show();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv

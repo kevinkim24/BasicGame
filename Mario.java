@@ -32,14 +32,21 @@ public class Mario {
     public void move() {
         xpos += (int) dx;
         ypos += (int) dy;
+        wrap();
     }
 
-    public void wrap(){
+    public void bounce(){
         if (xpos == 1000 - width && dx > 0) dx *= -1;
         else if (ypos == 700 - height && dy > 0) dy *= -1;
         else if (xpos == 0 && dx < 0) dx *= -1;
         else if (ypos == 0 && dy < 0) dy *= -1;
+    }
 
+    public void wrap(){
+        if (xpos == 1000 && dx > 0) xpos = 0;
+        else if (ypos == 700 && dy > 0) ypos = 0;
+        else if (xpos == 0 && dx < 0) xpos = 1000;
+        else if (ypos == 0 && dy < 0) ypos = 700;
     }
 
     public static void main(String[] args) {
