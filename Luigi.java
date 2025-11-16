@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Mario {
+public class Luigi {
     public String name; // Means Mario has all these attributes
     public Image image;
     public int xpos;
@@ -12,11 +12,11 @@ public class Mario {
     public Rectangle hitbox;
     //public boolean isAlive;
 
-    public Mario(){
+    public Luigi(){
         hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
-    public Mario(int xposInput, int yposInput, double dxInput, double dyInput, int widthInput, int heightInput){
+    public Luigi(int xposInput, int yposInput, double dxInput, double dyInput, int widthInput, int heightInput){
         // Take in params
         xpos = xposInput;
         ypos = yposInput;

@@ -9,8 +9,8 @@ public class BasicGameApp implements Runnable {
     //Variable Definition Section
     //You can set their initial values too
     Mario mario;
-
-    // I made an edit
+    Luigi luigi;
+    Image background;
 
     //Sets the width and height of the program window
     final int WIDTH = 1000;
@@ -22,15 +22,22 @@ public class BasicGameApp implements Runnable {
 
         //variable and objects
         //create (construct) the objects needed for the game
+        background = Toolkit.getDefaultToolkit().getImage("marioworld.png");
+
         mario = new Mario(500,350,1.5,1.5,100,100);
         mario.name = "Mario Mario";
         mario.image = Toolkit.getDefaultToolkit().getImage("Mario.png");
+
+        luigi = new Luigi(000,350,1.5,1.5,200,300);
+        luigi.name = "Luigi Mario";
+        luigi.image = Toolkit.getDefaultToolkit().getImage("luigi.png");
     }
     // end BasicGameApp constructor
 
     public void moveThings() {
         //call the move() code for each object  -
         mario.move();
+        luigi.move();
     }
 
     //Paints things on the screen using bufferStrategy
@@ -40,7 +47,9 @@ public class BasicGameApp implements Runnable {
 
         //draw the images
         // Signature: drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
+        g.drawImage(background,0,0,WIDTH,HEIGHT,null);  // Background MUST be drawn first
         g.drawImage(mario.image,mario.xpos,mario.ypos,mario.width,mario.height,null);
+        g.drawImage(luigi.image,luigi.xpos,luigi.ypos,luigi.width,luigi.height,null);
 
         g.dispose();
         bufferStrategy.show();
