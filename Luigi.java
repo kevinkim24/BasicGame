@@ -33,6 +33,8 @@ public class Luigi {
         xpos += (int) dx;
         ypos += (int) dy;
         bounce();
+
+        hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
     public void bounce(){

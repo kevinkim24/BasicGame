@@ -26,9 +26,10 @@ public class BasicGameApp implements Runnable {
 
         mario = new Mario(500,350,1.5,1.5,100,100);
         mario.name = "Mario Mario";
-        mario.image = Toolkit.getDefaultToolkit().getImage("Mario.png");
+        mario.aliveImage = Toolkit.getDefaultToolkit().getImage("Mario.png");
+        mario.deadImage = Toolkit.getDefaultToolkit().getImage("deadMario.jpg");
 
-        luigi = new Luigi(000,350,1.5,1.5,200,300);
+        luigi = new Luigi(0,350,1.5,1.5,200,300);
         luigi.name = "Luigi Mario";
         luigi.image = Toolkit.getDefaultToolkit().getImage("luigi.png");
     }
@@ -40,6 +41,21 @@ public class BasicGameApp implements Runnable {
         luigi.move();
     }
 
+    public void checkCollision(){
+        System.out.println("Checking for Collisions");
+        System.out.println(mario.hitbox);
+        System.out.println(luigi.hitbox);
+        if (mario.hitbox.intersects(luigi.hitbox)){
+            mario.isAlive = false;
+            System.out.println("INTERSECTING");
+        }
+        else{
+            System.out.println("No collision");
+            mario.isAlive = true;
+        }
+    }
+
+
     //Paints things on the screen using bufferStrategy
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
@@ -48,7 +64,12 @@ public class BasicGameApp implements Runnable {
         //draw the images
         // Signature: drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
         g.drawImage(background,0,0,WIDTH,HEIGHT,null);  // Background MUST be drawn first
-        g.drawImage(mario.image,mario.xpos,mario.ypos,mario.width,mario.height,null);
+        if (mario.isAlive) {
+            g.drawImage(mario.aliveImage, mario.xpos, mario.ypos, mario.width, mario.height, null);
+        }
+        else{
+            g.drawImage(mario.deadImage, mario.xpos, mario.ypos, mario.width, mario.height, null);
+        }
         g.drawImage(luigi.image,luigi.xpos,luigi.ypos,luigi.width,luigi.height,null);
 
         g.dispose();
@@ -88,6 +109,7 @@ public class BasicGameApp implements Runnable {
         //for the moment we will loop things forever.
         while (true) {
             moveThings();  //move all the game objects
+            checkCollision();
             render();  // paint the graphics
             pause(10); // sleep for 10 ms
         }

@@ -2,7 +2,8 @@ import java.awt.*;
 
 public class Mario {
     public String name; // Means Mario has all these attributes
-    public Image image;
+    public Image aliveImage;
+    public Image deadImage;
     public int xpos;
     public int ypos;
     public double dx;
@@ -10,7 +11,7 @@ public class Mario {
     public int width;
     public int height;
     public Rectangle hitbox;
-    //public boolean isAlive;
+    public boolean isAlive = true;
 
     public Mario(){
         hitbox = new Rectangle(xpos,ypos,width,height);
@@ -33,6 +34,8 @@ public class Mario {
         xpos += (int) dx;
         ypos += (int) dy;
         bounce();
+
+        hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
     public void bounce(){
