@@ -1,10 +1,13 @@
 //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv DON'T CHANGE! vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 // Graphics Libraries
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
     //Variable Definition Section
     //You can set their initial values too
@@ -20,11 +23,12 @@ public class BasicGameApp implements Runnable {
     public BasicGameApp() { // BasicGameApp constructor
         setUpGraphics();
 
+        canvas.addKeyListener(this);
         //variable and objects
         //create (construct) the objects needed for the game
         background = Toolkit.getDefaultToolkit().getImage("marioworld.png");
 
-        mario = new Mario(500,350,1.5,1.5,100,100);
+        mario = new Mario(500,350,10,10,100,100);
         mario.name = "Mario Mario";
         mario.aliveImage = Toolkit.getDefaultToolkit().getImage("Mario.png");
         mario.deadImage = Toolkit.getDefaultToolkit().getImage("deadMario.jpg");
@@ -42,17 +46,52 @@ public class BasicGameApp implements Runnable {
     }
 
     public void checkCollision(){
-        System.out.println("Checking for Collisions");
-        System.out.println(mario.hitbox);
-        System.out.println(luigi.hitbox);
+      //  System.out.println("Checking for Collisions");
+      //  System.out.println(mario.hitbox);
+      //  System.out.println(luigi.hitbox);
         if (mario.hitbox.intersects(luigi.hitbox)){
             mario.isAlive = false;
-            System.out.println("INTERSECTING");
+            mario.health -= 1;
+            System.out.println(mario.health);
+           // System.out.println("INTERSECTING");
         }
         else{
-            System.out.println("No collision");
+          //  System.out.println("No collision");
             mario.isAlive = true;
         }
+    }
+
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        /* Old version
+        if (key == 87) {mario.ypos -= mario.dy;} // w: 87
+        else if (key == 65){mario.xpos -= mario.dx;} // a: 65
+        else if (key == 83){mario.ypos += mario.dy;} // s: 83
+        else if (key == 68){mario.xpos += mario.dx;} // d: 68
+         */
+
+        if (key == 87) {mario.up = true;} // w: 87
+        else if (key == 65){mario.left = true;} // a: 65
+        else if (key == 83){mario.down = true;} // s: 83
+        else if (key == 68){mario.right = true;} // d: 68
+
+        // w: 87
+        // a: 65
+        // s: 83
+        // d: 68
+    }
+
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (key == 87) {mario.up = false;} // w: 87
+        else if (key == 65){mario.left = false;} // a: 65
+        else if (key == 83){mario.down = false;} // s: 83
+        else if (key == 68){mario.right = false;} // d: 68
     }
 
 
@@ -155,6 +194,8 @@ public class BasicGameApp implements Runnable {
         canvas.requestFocus();
         System.out.println("DONE graphic setup");
     }
+
+
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }

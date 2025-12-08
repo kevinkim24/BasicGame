@@ -12,6 +12,11 @@ public class Mario {
     public int height;
     public Rectangle hitbox;
     public boolean isAlive = true;
+    public boolean up= false;
+    public boolean down = false;
+    public boolean left = false;
+    public boolean right = false;
+    public int health = 1000;
 
     public Mario(){
         hitbox = new Rectangle(xpos,ypos,width,height);
@@ -31,9 +36,13 @@ public class Mario {
     }
 
     public void move() {
-        xpos += (int) dx;
-        ypos += (int) dy;
-        bounce();
+        //xpos += (int) dx;
+        //ypos += (int) dy;
+        wrap();
+        if (up){ypos -= dy;}
+        if (down){ypos += dy;}
+        if (left){xpos -= dx;}
+        if (right){xpos += dx;}
 
         hitbox = new Rectangle(xpos,ypos,width,height);
     }
@@ -46,10 +55,10 @@ public class Mario {
     }
 
     public void wrap(){
-        if (xpos == 1000 && dx > 0) xpos = 0;
-        else if (ypos == 700 && dy > 0) ypos = 0;
-        else if (xpos == 0 && dx < 0) xpos = 1000;
-        else if (ypos == 0 && dy < 0) ypos = 700;
+        if (xpos >= 1000 ) xpos = 0;
+        else if (ypos >= 700 ) ypos = 0;
+        else if (xpos <= 0 ) xpos = 1000;
+        else if (ypos <= 0 ) ypos = 700;
     }
 
     public static void main(String[] args) {
